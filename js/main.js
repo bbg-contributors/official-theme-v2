@@ -27,6 +27,9 @@ function content_decrypt(content, password, verify = null) {
 
 currentArticleListPageOrder = 1; //这个变量表示目前在显示文章列表中的第几页，是从1开始数的
 
+success_locate_article_id = false;
+success_locate_page_id = false;
+
 if (localStorage.getItem("is_nightmode") === null || localStorage.getItem("is_nightmode") === undefined) {
   localStorage.setItem("is_nightmode", "off");
 }
@@ -1204,8 +1207,20 @@ axios
       let article_filename = getUrlArgs("filename");
       for (let i = 0; i < blog["文章列表"].length; i++) {
         if (blog["文章列表"][i]["文件名"] === article_filename) {
+          success_locate_article_id = true;
           enter_article(i);
         }
+      }
+      if (success_locate_article_id !== true) {
+        document.getElementById("root").setAttribute("style", "");
+        document.getElementById("loading").setAttribute("style", "display:none;");
+        document.getElementById("root").innerHTML = `
+        <div style="text-align:center">
+          <br />
+        <h3>此文章不存在或已被删除</h3>
+        <p>This article does not exist or has already been deleted.</p>
+        </div>
+        `;
       }
     }
 
@@ -1213,8 +1228,20 @@ axios
       let page_filename = getUrlArgs("filename");
       for (let i = 0; i < blog["页面列表"].length; i++) {
         if (blog["页面列表"][i]["文件名"] === page_filename) {
+          success_locate_page_id = true;
           enter_page(i);
         }
+      }
+      if (success_locate_page_id !== true) {
+        document.getElementById("root").setAttribute("style", "");
+        document.getElementById("loading").setAttribute("style", "display:none;");
+        document.getElementById("root").innerHTML = `
+        <div style="text-align:center">
+          <br />
+        <h3>此页面不存在或已被删除</h3>
+        <p>This page does not exist or has already been deleted.</p>
+        </div>
+        `;
       }
     }
 
