@@ -135,59 +135,73 @@ highlight_css_import_finished = false;
 const langdata = {
   "ARCHIVE_AND_TAGS": {
     "简体中文": "归档和标签",
-    "English": "Archive and tags"
+    "English": "Archive and tags",
+    "日本語": "アーカイブとタグ"
   },
   "ARTICLE_LIST": {
     "简体中文": "文章列表",
-    "English": "Article List"
+    "English": "Article List",
+    "日本語": "記事一覧"
   },
   "ARTICLE_CREATEDAT": {
     "简体中文": "此文章编写于",
-    "English": "This article is written at "
+    "English": "This article is written at ",
+    "日本語": "作成日"
   },
   "LASTMODIFIEDAT": {
     "简体中文": "最近修改于",
-    "English": "Last modified at "
+    "English": "Last modified at ",
+    "日本語": "修正日"
   },
   "TAGS": {
     "简体中文": "标签",
-    "English": "Tags: "
+    "English": "Tags: ",
+    "日本語": "タグ"
   },
   "COMMENT_UNAVAILABLE_DUE_TO_PREVIEW": {
     "简体中文": "由于你目前正在预览环境之中，评论功能暂时被禁用了。当你的站点被从互联网访问时，评论系统会正常地显示在这里。",
-    "English": "Comment function banned because you are now in the preview environment. When the site is visited from the Internet, the comment system will be available here."
+    "English": "Comment function banned because you are now in the preview environment. When the site is visited from the Internet, the comment system will be available here.",
+    "日本語": "現在プレビュー環境のため、コメント機能が禁止されています。インターネットからサイトにアクセスすると、ここにコメントシステムが表示されます。"
   },
   "FRIEND_BOOK": {
     "简体中文": "友人帐",
-    "English": "Friend book"
+    "English": "Friend book",
+    "日本語": "友人帳"
   },
   "COPYRIGHT_HINT": {
     "简体中文": "版权声明",
-    "English": "About the copyright of the article"
+    "English": "About the copyright of the article",
+    "日本語": "記事の著作権について"
   },
   "PREVIOUS_POST": {
     "简体中文": "上一篇文章",
-    "English": "Previous post"
+    "English": "Previous post",
+    "日本語": "前の記事へ"
   },
   "NEXT_POST": {
     "简体中文": "下一篇文章",
-    "English": "Next post"
+    "English": "Next post",
+    "日本語": "次の記事へ"
   },
   "NOTHING": {
     "简体中文": "没有了",
-    "English": "nothing"
+    "English": "nothing",
+    "日本語": "記事が存在しない"
   },
   "COPYRIGHT_RESERVED": {
     "简体中文": "除特别声明外，本博客上的内容由博主保留所有权利，进行转载前需先获得博主同意。",
-    "English": "Unless otherwise stated, the content on this blog is reserved by the blogger, and the blogger's consent must be obtained before reprinting."
+    "English": "Unless otherwise stated, the content on this blog is reserved by the blogger, and the blogger's consent must be obtained before reprinting.",
+    "日本語": "特別な記載がない限り、このブログ内の記事はブロガーの所有物であり、転載にはブロガーの同意が必要です。"
   },
   "COPYRIGHT_CC_BY_NC_SA_FOUR_DOT_ZERO": {
     "简体中文": "除特别声明外，本博客上的内容采用 <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh' target='_blank'>CC BY-NC-SA 4.0 许可协议</a> 授权。转载请注明出处！",
-    "English": "Unless otherwise stated, the content on this blog is licensed under the CC BY-NC-SA 4.0 license. Please indicate the source when reprinting!"
+    "English": "Unless otherwise stated, the content on this blog is licensed under the <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en' target='_blank'>CC BY-NC-SA 4.0 license</a>. Please indicate the source when reprinting!",
+    "日本語": "特別な記載がない限り、このブログ内の記事は<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja' target='_blank'>CC BY-NC-SA 4.0ライセンス</a>を使用しています。転載の際は出典を明記してください！"
   },
   "COPYRIGHT_UNLICENSED": {
     "简体中文": "除特别声明外，本博客上的内容属于公有领域，这意味着你可以不受限制地使用和加工它们。",
-    "English": "Unless otherwise stated, the content on this blog is in the public domain, which means you can use and process it without restriction."
+    "English": "Unless otherwise stated, the content on this blog is in the public domain, which means you can use and process it without restriction.",
+    "日本語": "特別な記載がない限り、このブログ内の記事はパブリックドメインであり、制限なく使用・加工できます。"
   }
 }
 
