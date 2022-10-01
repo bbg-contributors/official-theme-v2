@@ -13,12 +13,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Archive
         run: |
-          zip -r offical-theme-v2.zip index.html ./css ./js
-          mv offical-theme-v2.zip offical-theme-v2.bbgtheme2
+          zip -r official-theme-v2.zip index.html ./css ./js
+          mv official-theme-v2.zip official-theme-v2.bbgtheme2
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          name: offical-theme-v2 ${{ github.ref_name }}
+          name: official-theme-v2 ${{ github.ref_name }}
           draft: false
           prerelease: false
-          files: offical-theme-v2.bbgtheme2
+          files: official-theme-v2.bbgtheme2
