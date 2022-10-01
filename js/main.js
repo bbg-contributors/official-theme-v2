@@ -203,30 +203,30 @@ const langdata = {
     "English": "Unless otherwise stated, the content on this blog is in the public domain, which means you can use and process it without restriction.",
     "日本語": "特別な記載がない限り、このブログ内の記事はパブリックドメインであり、制限なく使用・加工できます。"
   },
-  "SEARCH_SOMETHING": {
+  "SEARCH_SOMETHING":{
     "简体中文": "在站点内搜索",
     "English": "Search something...",
-    "日本語": "Search something..."
+    "日本語": "検索..."
   },
-  "START_SEARCH": {
+  "START_SEARCH":{
     "简体中文": "开始搜索",
     "English": "Search",
-    "日本語": "Search"
+    "日本語": "検索"
   },
-  "KEYWORD": {
+  "KEYWORD":{
     "简体中文": "关键词",
     "English": "Keyword",
-    "日本語": "Keyword"
+    "日本語": "キーワード"
   },
-  "SEARCH_RESULT": {
+  "SEARCH_RESULT":{
     "简体中文": "搜索结果",
     "English": "Results",
-    "日本語": "Results"
+    "日本語": "検索結果"
   },
-  "COULD_NOT_FIND_RESULT": {
+  "COULD_NOT_FIND_RESULT":{
     "简体中文": "未找到结果",
     "English": "Could not find a result",
-    "日本語": "Could not find a result"
+    "日本語": "検索結果はありません"
   }
 }
 
