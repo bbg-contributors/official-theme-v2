@@ -117,7 +117,7 @@ function switch_night_mode() {
 }
 
 function detect_whether_ui_load_finished() {
-  if (highlight_css_import_finished === true && bootstrap_css_import_finished === true && content_load_finished === true) {
+  if (bootstrap_css_import_finished === true && content_load_finished === true) {
     document.getElementById("root").setAttribute("style", "");
     document.getElementById("loading").setAttribute("style", "display:none");
   }
@@ -202,6 +202,31 @@ const langdata = {
     "简体中文": "除特别声明外，本博客上的内容属于公有领域，这意味着你可以不受限制地使用和加工它们。",
     "English": "Unless otherwise stated, the content on this blog is in the public domain, which means you can use and process it without restriction.",
     "日本語": "特別な記載がない限り、このブログ内の記事はパブリックドメインであり、制限なく使用・加工できます。"
+  },
+  "SEARCH_SOMETHING": {
+    "简体中文": "在站点内搜索",
+    "English": "Search something...",
+    "日本語": "Search something..."
+  },
+  "START_SEARCH": {
+    "简体中文": "开始搜索",
+    "English": "Search",
+    "日本語": "Search"
+  },
+  "KEYWORD": {
+    "简体中文": "关键词",
+    "English": "Keyword",
+    "日本語": "Keyword"
+  },
+  "SEARCH_RESULT": {
+    "简体中文": "搜索结果",
+    "English": "Results",
+    "日本語": "Results"
+  },
+  "COULD_NOT_FIND_RESULT": {
+    "简体中文": "未找到结果",
+    "English": "Could not find a result",
+    "日本語": "Could not find a result"
   }
 }
 
@@ -215,6 +240,62 @@ function preview_env_public_comment_fix() {
 function resetPage() {
   document.querySelector("#root").innerHTML = "";
   console.log("reset ok");
+}
+
+function start_search() {
+  let keyword = document.getElementById("search_keyword").value;
+  let totalSearchResultNumber = 0;
+
+  document.getElementById("search_dialog_results").innerHTML = `
+  <br /><hr />
+  <h3>${langdata["SEARCH_RESULT"][lang_name]}</h3>
+  `;
+
+  for (let i = 0; i < blog["文章列表"].length; i++) {
+    if (blog["文章列表"][i]["文章标题"].indexOf(keyword) !== -1 || blog["文章列表"][i]["摘要"].indexOf(keyword) !== -1) {
+      if (blog["文章列表"][i]["是否隐藏"] === false) {
+        document.getElementById("search_dialog_results").innerHTML += `
+      <br />
+      <div class="card" style="padding:20px">
+        <a href="javascript:void(0)" data-bs-dismiss="modal" onclick="enter_article(${i});return false;"><h5>${blog["文章列表"][i]["文章标题"]}</h5></a>
+        <p>${blog["文章列表"][i]["摘要"]}</p>
+        </div>
+      
+      `;
+        totalSearchResultNumber++;
+      }
+    }
+  }
+  if (totalSearchResultNumber === 0) {
+    document.getElementById("search_dialog_results").innerHTML += `
+      <br />
+      <p>${langdata["COULD_NOT_FIND_RESULT"][lang_name]}</p>
+      
+      `;
+  }
+}
+
+function start_search_dialog() {
+  const dialog = new bootstrap.Modal(document.getElementById('search_dialog'))
+  dialog.toggle();
+
+  document.getElementById("search_dialog_title").innerHTML = langdata["SEARCH_SOMETHING"][lang_name];
+  document.getElementById("search_dialog_body").innerHTML = `
+
+  <div class="row g-2">
+<div class="col-auto">
+<input class="form-control" id="search_keyword" placeholder="${langdata["KEYWORD"][lang_name]}">
+</div>
+<div class="col-auto">
+<button class="btn btn-primary" onclick="start_search()"> ${langdata["START_SEARCH"][lang_name]}</button>
+</div>
+</div>
+
+<div id="search_dialog_results">
+
+</div>
+  
+  `;
 }
 function render_nav(isIndexPage) {
   //todo: fix router
@@ -233,6 +314,9 @@ function render_nav(isIndexPage) {
           <a class="nav-link" href="./index.html?type=internal&function=archive_and_tags" onclick="enter_archive_and_tags();return false;">${langdata["ARCHIVE_AND_TAGS"][lang_name]}</a>
         </li>
       </ul>
+      <div class="d-flex" role="search">
+      <button class="btn btn-outline-light" onclick="start_search_dialog()"><i class="fa fa-search"></i> ${langdata["SEARCH_SOMETHING"][lang_name]}</button>
+  </div>
     </div>
   </div>
 </nav>`;
@@ -432,16 +516,13 @@ function render_article_list() {
 }
 
 function render_friend_book_list() {
-
-  let numberInFriendListOne = Math.ceil(blog["友人帐"].length / 2);
-  for (let i = 0; i < numberInFriendListOne; i++) {
-    render_friend_book_friend("friend_book_list1", blog["友人帐"][i]["名称"], blog["友人帐"][i]["链接"], blog["友人帐"][i]["图标"], blog["友人帐"][i]["简介"])
+  for (let i = 0; i < blog["友人帐"].length; i++) {
+    if ((i % 2) === 0) {
+      render_friend_book_friend("friend_book_list1", blog["友人帐"][i]["名称"], blog["友人帐"][i]["链接"], blog["友人帐"][i]["图标"], blog["友人帐"][i]["简介"])
+    } else {
+      render_friend_book_friend("friend_book_list2", blog["友人帐"][i]["名称"], blog["友人帐"][i]["链接"], blog["友人帐"][i]["图标"], blog["友人帐"][i]["简介"])
+    }
   }
-
-  for (let i = numberInFriendListOne; i < blog["友人帐"].length; i++) {
-    render_friend_book_friend("friend_book_list2", blog["友人帐"][i]["名称"], blog["友人帐"][i]["链接"], blog["友人帐"][i]["图标"], blog["友人帐"][i]["简介"])
-  }
-
 }
 
 function render_article_content(article_id) {
@@ -1132,8 +1213,6 @@ function importHighlightCSSFile(uri) {
     .get(uri)
     .then(function (response) {
       document.getElementById("highlight_css").innerHTML += response.data;
-      highlight_css_import_finished = true;
-      detect_whether_ui_load_finished();
     })
 }
 
