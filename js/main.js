@@ -4,10 +4,31 @@ marked.setOptions({
   }
 });
 
+const image_viewer_dialog = new bootstrap.Modal(document.getElementById('image_viewer_dialog'));
+
+markdown_renderer = new marked.Renderer();
+
+baseurl = "";
+
 window.onpopstate = function () {
   if (window.location.href.indexOf("#top") === -1) {
     window.location.reload();
   }
+}
+
+function openImageViewer(url) {
+  document.querySelector("#image_viewer_dialog_body").innerHTML = `
+  <button onclick="window.open('${baseurl}${url}')" class="btn btn-success"><i class="fa fa-file-image-o"></i> 在新标签页打开此图像</button>
+  <br />
+  <br />
+  <img src="${baseurl}${url}" style="max-width: 100%" />
+  <br />
+  <br />
+  <button onclick="window.open('${baseurl}${url}')" class="btn btn-success"><i class="fa fa-file-image-o"></i> 在新标签页打开此图像</button>
+  <button onclick="image_viewer_dialog.hide()" class="btn btn-primary"><i class="fa fa-times"></i> 关闭此对话框</button>
+
+  `;
+  image_viewer_dialog.toggle();
 }
 
 function content_decrypt(content, password, verify = null) {
@@ -618,7 +639,9 @@ function render_friend_book_list() {
 }
 
 function render_article_content(article_id) {
-
+  if (blog["Markdown渲染配置"]["使用markdown文件所在目录作为baseurl"]) {
+    baseurl = "/data/articles/"
+  }
   if (blog["启用网站公告"] === true && blog["网站公告仅在首页显示"] === false) {
     document.querySelector("#container").innerHTML += `
       <div class="alert alert-primary">
@@ -1546,7 +1569,9 @@ function render_tag(tagname) {
 }
 
 function render_page(page_id) {
-
+  if (blog["Markdown渲染配置"]["使用markdown文件所在目录作为baseurl"]) {
+    baseurl = "/data/pages/"
+  }
   if (blog["启用网站公告"] === true && blog["网站公告仅在首页显示"] === false) {
     document.querySelector("#container").innerHTML += `
       <div class="alert alert-primary">
@@ -1803,6 +1828,46 @@ axios
         break;
       default:
         blogContentLicenseText = `${blog["全站内容授权协议"]}`;
+    }
+
+    if (blog["Markdown渲染配置"]["根据用户屏幕尺寸渲染图片尺寸"] && blog["Markdown渲染配置"]["在用户点击图片时显示图片查看器"]) {
+
+      markdown_renderer.image = function (src, title, alt) {
+        return `<img style="max-width:100%;max-height:400px; border-style:solid; border-width: 2px; border-color: #66ccff; border-radius: 6px" onclick="openImageViewer('${src}')" src="${baseurl}${src}" alt="${alt}" title="${title ? title : ''}" />
+        `
+      }
+
+      marked.setOptions({
+        renderer: markdown_renderer
+      });
+    } else if (blog["Markdown渲染配置"]["根据用户屏幕尺寸渲染图片尺寸"] === true && blog["Markdown渲染配置"]["在用户点击图片时显示图片查看器"] === false) {
+
+      markdown_renderer.image = function (src, title, alt) {
+        return `<img style="max-width:100%;max-height:400px; border-style:solid; border-width: 2px; border-color: #66ccff; border-radius: 6px" src="${baseurl}${src}" alt="${alt}" title="${title ? title : ''}" />
+        `
+      }
+
+      marked.setOptions({
+        renderer: markdown_renderer
+      });
+    } else if (blog["Markdown渲染配置"]["根据用户屏幕尺寸渲染图片尺寸"] === false && blog["Markdown渲染配置"]["在用户点击图片时显示图片查看器"] === true) {
+      markdown_renderer.image = function (src, title, alt) {
+        return `<img onclick="openImageViewer('${src}')" src="${baseurl}${src}" alt="${alt}" title="${title ? title : ''}" />
+        `
+      }
+
+      marked.setOptions({
+        renderer: markdown_renderer
+      });
+    } else if (blog["Markdown渲染配置"]["使用markdown文件所在目录作为baseurl"]) {
+      markdown_renderer.image = function (src, title, alt) {
+        return `<img src="${baseurl}${src}" alt="${alt}" title="${title ? title : ''}" />
+        `
+      }
+
+      marked.setOptions({
+        renderer: markdown_renderer
+      });
     }
 
     if (blog["使版心宽度更窄（提高左右页边距）"]) {
