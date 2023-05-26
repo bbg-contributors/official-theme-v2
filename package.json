@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "js-beautify": "^1.14.7",
+    "jsdom": "^22.0.0"
+  }
+}
