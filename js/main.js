@@ -2162,20 +2162,26 @@ axios
       comment_authcode = "";
     }
 
-    // 背景图片载入
+    // 网页背景载入
 
-    if (blog["全局主题设置"]["是否使用背景图像"]) {
-      //todo:支持更多方式
+    if (blog["全局主题设置"]["是否使用纯色背景（优先级高于背景图像）"]) {
+      document.querySelector("#blogcss").innerHTML += `body:before{
+            background: ${blog["全局主题设置"]["若使用纯色背景，颜色为"]};
+          }`;
+    } else if (blog["全局主题设置"]["是否使用背景图像"]) {
 
-      if (
+      if (blog["全局主题设置"]["若使用背景图像，设置为"]["将网站根目录下的background.webp作为背景图像"]) {
+        document.querySelector("#blogcss").innerHTML += `body:before{
+              background: url(./background.webp) center/cover;
+            }`;
+      } else if (
         blog["全局主题设置"]["若使用背景图像，设置为"][
-          "使用随机二次元图片作为背景图像（浅色背景）"
+          "将某个url作为背景图像"
         ]
       ) {
         document.querySelector("#blogcss").innerHTML += `body:before{
-
-    background: url(https://api.paugram.com/wallpaper/) center/cover;
-}`;
+              background: url(${blog["全局主题设置"]["若使用背景图像，设置为"]["若将某个url作为背景图像，这个url是"]}) center/cover;
+            }`;
       }
     }
 
