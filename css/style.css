@@ -30,21 +30,114 @@ samp {
   white-space: pre-wrap;
 }
 
-#night_mode_btn {
-  position: fixed;
-  z-index: 99;
-  right: 20px;
-  bottom: 20px;
-}
-
 #back_to_top_btn {
   position: fixed;
   z-index: 99;
   right: 20px;
-  bottom: 60px;
+  bottom: 30px;
 }
 
-#night_mode_btn * i,
 #back_to_top_btn * i {
   width: 0.7em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000c7;
+
+  }
+
+  .blog_title_jumbotron,
+  .bg-light {
+    background-color: #363232 !important;
+  }
+
+  .copyright_hint {
+    color: white;
+  }
+
+  #blog_index_title,
+  #blog_index_subtitle,
+  .article-content h2,
+  .page-content h2,
+  #article-content-html p,
+  #page-content-html p {
+    color: white;
+  }
+
+  .article-item,
+  .article-content,
+  .page-content {
+    background-color: #000000a8
+  }
+
+  .article-item p,
+  .article-item-sub,
+  .article-content-sub,
+  #page_order_html,
+  #bottom_info_html {
+    color: lightgrey !important;
+  }
+
+  .card,
+  #tag-content {
+    background-color: black;
+    color: white
+  }
+
+  ul,
+  ol,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  th,
+  td,
+  .vcontent *,
+  #veditor {
+    color: white
+  }
+
+  .vcontent p,
+  .vnick,
+  .vlink,
+  .vmail,
+  .vinput,
+  .vsubmit {
+    color: white !important
+  }
+
+  .vcontent * {
+    background-color: black !important;
+  }
+
+  .expand::after {
+    background: black !important;
+    color: white !important;
+  }
+
+  .expand::before {
+    background: rgba(0, 0, 0, 0.5) !important
+  }
+
+  pre,
+  code,
+  kbd,
+  samp {
+    border-radius: 4px;
+    background-color: black !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: inline-block;
+  }
+
+  .bbg-comment-area {
+    background-color: black;
+    color: white
+  }
 }
